@@ -9,6 +9,33 @@ on top of my main view controller
 
 ![Slide demonstration](https://raw.githubusercontent.com/graetzer/SGPresentation/master/demo_slide.gif)
 
+Uage example with ```CNPGridMenu```
+
+    CNPGridMenu *gridMenu = [[CNPGridMenu alloc] initWithMenuItems:menuItems];
+    //gridMenu.delegate = self;
+    gridMenu.transitioningDelegate = self;
+    gridMenu.modalPresentationStyle = UIModalPresentationCustom;
+    [viewController presentViewController:gridMenu animated:YES completion:NULL];
+    // ...
+    #pragma mark - UIViewControllerTransitioningDelegate
+    - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+                                                          presentingViewController:(UIViewController *)presenting
+                                                              sourceViewController:(UIViewController *)source {
+        return [[SGSidePresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+    }
+    
+    - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                      presentingController:(UIViewController *)presenting
+                                                                          sourceController:(UIViewController *)source {
+        return [SGSlideTransition new];
+    }
+    
+    - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+        SGSlideTransition *slide = [SGSlideTransition new];
+        slide.direction = SGSlideTransitionDirectionOutRight;
+        return slide;
+    }
+
 # Licence 
 
    Copyright (c) 2015 Simon Grätzer
