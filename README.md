@@ -7,7 +7,7 @@ Some presentation implementations I needed
 Used this in a project of mine to present a [CNPGridMenu](https://github.com/carsonperrotti/CNPGridMenu)
 on top of my main view controller
 
-![https://raw.githubusercontent.com/graetzer/SGPresentation/master/demo_slide.gif](Slide demonstration)
+![Slide demonstration](https://raw.githubusercontent.com/graetzer/SGPresentation/master/demo_slide.gif)
 
 # Licence 
 
