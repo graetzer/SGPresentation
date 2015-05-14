@@ -2,7 +2,19 @@
 //  SGSidePresentationController.m
 //
 //  Created by Simon Grätzer on 18.04.15.
-//  Copyright (c) 2015 Simon Grätzer. All rights reserved.
+//  Copyright (c) 2015 Simon Grätzer
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "SGSidePresentationController.h"
@@ -13,7 +25,7 @@
 
     if(self = [super initWithPresentedViewController:presentedViewController
                             presentingViewController:presentingViewController]) {
-        
+        _screenFraction = 0.25;
         [self prepareDimmingView];
     }
     return self;
@@ -65,8 +77,8 @@
 }
 
 - (CGSize)sizeForChildContentContainer:(id <UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-    // We always want a size that's a third of our parent view width, and just as tall as our parent
-    return CGSizeMake(floorf(parentSize.width / 4.0), parentSize.height);
+    // We always want a size that's a fraction of our parent view width, and just as tall as our parent
+    return CGSizeMake(floorf(parentSize.width * _screenFraction), parentSize.height);
 }
 
 - (void)containerViewWillLayoutSubviews {
@@ -83,7 +95,9 @@
     presentedViewFrame.size = [self sizeForChildContentContainer:(UIViewController<UIContentContainer> *)[self presentedViewController]
                                          withParentContainerSize:containerBounds.size];
     
-    presentedViewFrame.origin.x = containerBounds.size.width - presentedViewFrame.size.width;
+    if (_sideMode == SGSidePresentationModeRigth) {
+        presentedViewFrame.origin.x = containerBounds.size.width - presentedViewFrame.size.width;
+    }
     return presentedViewFrame;
 }
 
