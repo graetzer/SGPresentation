@@ -1,6 +1,5 @@
 //
 //  SGSlideTransition.h
-//  NextSearch
 //
 //  Created by Simon Grätzer on 18.04.15.
 //  Copyright (c) 2015 Simon Grätzer
